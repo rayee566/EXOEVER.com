@@ -156,9 +156,49 @@
                     data-i18n="nav.consult">
                     立即諮詢
                 </a>
-                <button class="lg:hidden">
+                <button class="lg:hidden" onclick="toggleMobileMenu()">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-white z-[150] translate-x-full transition-transform duration-500 lg:hidden">
+            <div class="p-6 flex flex-col h-full">
+                <div class="flex justify-between items-center mb-16">
+                    <img src="assets/logo.png" alt="EXOEVER Logo" class="h-6 w-auto">
+                    <button onclick="toggleMobileMenu()">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <nav class="flex flex-col gap-8 text-center">
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#features"
+                        onclick="toggleMobileMenu()" data-i18n="nav.features">首頁</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#product" onclick="toggleMobileMenu()"
+                        data-i18n="nav.product">產品介紹</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#science" onclick="toggleMobileMenu()"
+                        data-i18n="nav.science">科學研究</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#quality" onclick="toggleMobileMenu()"
+                        data-i18n="nav.quality">品質認證</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#contact" onclick="toggleMobileMenu()"
+                        data-i18n="nav.contact">聯繫我們</a>
+                </nav>
+                <div class="mt-auto pb-12">
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <button onclick="changeLanguage('tw'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">繁體中文</button>
+                        <button onclick="changeLanguage('en'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">ENGLISH</button>
+                        <button onclick="changeLanguage('jp'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">日本語</button>
+                        <button onclick="changeLanguage('cn'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">简体中文</button>
+                    </div>
+                    <a href="https://lin.ee/hA0fzeC" target="_blank"
+                        class="block w-full py-4 bg-deep-charcoal text-white text-[10px] tracking-editorial uppercase text-center"
+                        data-i18n="nav.consult">立即諮詢</a>
+                </div>
             </div>
         </div>
     </header>
@@ -545,7 +585,7 @@
         </section>
         <section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden" id="contact">
             <div class="absolute inset-0 bg-cover bg-center grayscale opacity-10"
-                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNmxUJalRLuJqyeyoKCuEbhX2aOomsrAjq1rOfbFcN-BAjwEerL_AIq3-7lDwQG-PyuNdOw5F7KUnlnHfmo0l6PGQzJnqZ0Zk45wkVB4hpYElBk2G94OMaLRuYleqU7eoOVV_Trj6btkOqVpyOtAe6yaqby7Ds8zYAuY7g6bbIy-lVYsIajKHLIIJHp8h8CZmi3__G-xnBJSHCfClEQTqLzI_kLQ0kDXPMWYO_0TELGkoTkpk06t9OEH1xRv9Ddy-Iw6QhT4HM7OQ');">
+                style="background-image: url('assets/contact_bg.jpg');">
             </div>
             <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
             <div class="relative z-10 text-center max-w-2xl px-8">
@@ -573,9 +613,7 @@
                         <img src="assets/logo.png" alt="EXOEVER Logo" class="h-6 md:h-8 w-auto mx-auto md:mx-0">
                     </div>
                     <p class="text-[10px] text-gray-600 leading-relaxed" data-i18n="footer.slogan">
-                        114臺北市內湖區行善路116號<br />1F.,No.116,Xingshan Rd.,Neihu Dist.,Taipei City
-                        114,Taiwan(R.O.C.)<br />TEL:
-                        02-8791-8886<br /><br />EMAIL：SERVICE@HEALTHONLY.SHOP<br />營業時間：星期一至星期五: 10am - 7pm
+                        ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />電話:080-2775-1122
                     </p>
                 </div>
                 <div class="flex flex-col items-center md:items-end gap-4">
@@ -680,7 +718,6 @@
                 "quality.ref.list.3": "3. 第三方 GLP 檢測實驗室執行毒理與微生物檢測",
                 "quality.ref.result": "檢驗結果顯示，產品具備高純度、安全性，無微生物汙染、無重金屬超標，且內毒素含量符合規範，適合應用於注射型製劑或高端營養補充用途。",
                 "quality.origin": "純正日本來源 PURE JAPANESE ORIGIN",
-                "quality.verification_text": "我們的產品經過嚴格的科學驗證，確保每一批次都達到最高的純度和安全性標準。這不僅是我們的承諾，更是您健康的保障。",
                 "quality.table.item": "檢測項目 (Analytical Item)",
                 "quality.table.result": "檢測結果 (Result)",
                 "quality.table.method": "檢測方法 (Method)",
@@ -1221,6 +1258,20 @@
             event.stopPropagation();
             const langMenu = document.querySelector('.lang-menu');
             if (langMenu) langMenu.classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                const isOpen = !mobileMenu.classList.contains('translate-x-full');
+                if (isOpen) {
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                } else {
+                    mobileMenu.classList.remove('translate-x-full');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
         }
 
         // Close dropdown when clicking outside
