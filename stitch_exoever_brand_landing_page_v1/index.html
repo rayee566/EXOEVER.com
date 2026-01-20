@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EXOEVER Pre NAD+ | 極簡日系科學官網</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Inter:wght@100;200;300;400;500;600&amp;family=Noto+Sans+TC:wght@100;300;400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "brand-red": "#9D1A1A",
+                        "brand-gold": "#C5A059",
+                        "soft-gray": "#F9F9F9",
+                        "deep-charcoal": "#1A1A1A"
+                    },
+                    fontFamily: {
+                        "serif": ["Cormorant Garamond", "Noto Sans TC", "serif"],
+                        "sans": ["Inter", "Noto Sans TC", "sans-serif"],
+                        "helvetica": ["Helvetica", "Arial", "sans-serif"]
+                    },
+                    letterSpacing: {
+                        "dramatic": "0.5em",
+                        "editorial": "0.2em"
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                background-color: white;
+                color: #1a1a1a;
+                font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                overflow-x: hidden;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            h1, h2, h3, .serif-font {
+                font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+            }
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .line-graph {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 0;
+        }
+        .circle-benefit {
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .circle-benefit:hover {
+            transform: scale(1.05);
+            border-color: #9D1A1A;
+        }
+        .text-justified-magazine {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .lang-menu.active {
+            display: block;
+        }
+        .nav-link {
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .nav-link:hover {
+            color: #C41E3A;
+        }
+        
+        /* Map Animations */
+        @keyframes mapPing {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        .map-ping {
+            animation: mapPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        .map-marker {
+            transition: all 0.3s ease;
+        }
+        .map-container:hover .map-marker {
+            filter: drop-shadow(0 0 8px rgba(157, 26, 26, 0.4));
+        }
+        .map-point:hover .marker-label {
+            opacity: 1;
+            transform: translateY(-8px);
+        }
+        .marker-label {
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="fixed top-0 w-full z-[100] bg-white/90 backdrop-blur-md border-b border-gray-50">
+        <div class="max-w-[1800px] mx-auto px-6 md:px-12 h-20 md:h-24 flex items-center justify-between">
+            <div class="flex-shrink-0">
+                <a class="block" href="#">
+                    <img src="assets/logo.png" alt="EXOEVER Logo" class="h-6 md:h-8 w-auto">
+                </a>
+            </div>
+            <nav class="hidden lg:flex items-center gap-12 absolute left-1/2 -translate-x-1/2">
+                <a class="nav-link" href="#features" data-i18n="nav.features">首頁</a>
+                <a class="nav-link" href="#product" data-i18n="nav.product">產品介紹</a>
+                <a class="nav-link" href="#science" data-i18n="nav.science">科學研究</a>
+                <a class="nav-link" href="#quality" data-i18n="nav.quality">品質認證</a>
+                <a class="nav-link" href="#contact" data-i18n="nav.contact">聯繫我們</a>
+            </nav>
+            <div class="flex items-center gap-6">
+                <div class="relative lang-dropdown hidden sm:block">
+                    <button onclick="toggleLangMenu(event)"
+                        class="flex items-center gap-2 text-[10px] uppercase tracking-editorial hover:text-brand-red transition-colors">
+                        <span class="material-symbols-outlined text-sm">language</span>
+                        <span data-i18n="current_lang">繁體中文</span>
+                        <span class="material-symbols-outlined text-xs">expand_more</span>
+                    </button>
+                    <div
+                        class="lang-menu hidden absolute top-full right-0 w-48 bg-white border border-gray-100 shadow-xl py-4 mt-2 cursor-pointer">
+                        <div class="block px-6 py-2 text-[10px] tracking-widest hover:bg-soft-gray transition-colors"
+                            onclick="changeLanguage('tw')">繁體中文 (TW)</div>
+                        <div class="block px-6 py-2 text-[10px] tracking-widest hover:bg-soft-gray transition-colors"
+                            onclick="changeLanguage('cn')">简体中文 (CN)</div>
+                        <div class="block px-6 py-2 text-[10px] tracking-widest hover:bg-soft-gray transition-colors"
+                            onclick="changeLanguage('en')">ENGLISH (EN)</div>
+                        <div class="block px-6 py-2 text-[10px] tracking-widest hover:bg-soft-gray transition-colors"
+                            onclick="changeLanguage('jp')">日本語 (JP)</div>
+                        <div class="block px-6 py-2 text-[10px] tracking-widest hover:bg-soft-gray transition-colors"
+                            onclick="changeLanguage('vn')">TIẾNG VIỆT (VN)</div>
+                        <div class="block px-6 py-2 text-[10px] tracking-widest hover:bg-soft-gray transition-colors"
+                            onclick="changeLanguage('my')">BAHASA MELAYU (MY)</div>
+                    </div>
+                </div>
+                <a href="https://lin.ee/hA0fzeC" target="_blank"
+                    class="hidden md:block px-6 py-2.5 bg-deep-charcoal text-white text-[10px] tracking-editorial uppercase hover:bg-brand-red transition-all text-center"
+                    data-i18n="nav.consult">
+                    立即諮詢
+                </a>
+                <button class="lg:hidden" onclick="toggleMobileMenu()">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-white z-[150] translate-x-full transition-transform duration-500 lg:hidden">
+            <div class="p-6 flex flex-col h-full">
+                <div class="flex justify-between items-center mb-16">
+                    <img src="assets/logo.png" alt="EXOEVER Logo" class="h-6 w-auto">
+                    <button onclick="toggleMobileMenu()">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <nav class="flex flex-col gap-8 text-center">
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#features"
+                        onclick="toggleMobileMenu()" data-i18n="nav.features">首頁</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#product" onclick="toggleMobileMenu()"
+                        data-i18n="nav.product">產品介紹</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#science" onclick="toggleMobileMenu()"
+                        data-i18n="nav.science">科學研究</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#quality" onclick="toggleMobileMenu()"
+                        data-i18n="nav.quality">品質認證</a>
+                    <a class="text-lg tracking-widest uppercase font-serif" href="#contact" onclick="toggleMobileMenu()"
+                        data-i18n="nav.contact">聯繫我們</a>
+                </nav>
+                <div class="mt-auto pb-12">
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <button onclick="changeLanguage('tw'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">繁體中文</button>
+                        <button onclick="changeLanguage('en'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">ENGLISH</button>
+                        <button onclick="changeLanguage('jp'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">日本語</button>
+                        <button onclick="changeLanguage('cn'); toggleMobileMenu()"
+                            class="text-[10px] uppercase tracking-widest py-3 border border-gray-100">简体中文</button>
+                    </div>
+                    <a href="https://lin.ee/hA0fzeC" target="_blank"
+                        class="block w-full py-4 bg-deep-charcoal text-white text-[10px] tracking-editorial uppercase text-center"
+                        data-i18n="nav.consult">立即諮詢</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="pt-20 md:pt-0">
+
+        <section class="pt-16 pb-10 md:pt-24 md:pb-16 bg-white relative overflow-hidden" id="features">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 md:gap-24 items-center">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl md:text-5xl mb-8 font-serif leading-tight" data-i18n="features.source">
+                            EXOEVER與全球專業診所合作</h3>
+                        <p class="text-base text-gray-600 leading-relaxed mb-10 max-w-xl" data-i18n="features.desc">
+                            EXOEVER 與上海、台灣、日本的多家頂尖診所建立深度合作，以長壽轉化科學提供精準服務，持續為全球客戶研發抗衰與健康產品。</p>
+
+                    </div>
+                    <div class="relative group">
+                        <div
+                            class="aspect-[4/3] bg-soft-gray shadow-2xl rounded-sm relative overflow-hidden map-container border border-gray-100">
+                            <!-- High-Quality Minimalist East Asia Map Image -->
+                            <img src="assets/east_asia_map.png" alt="East Asia Map - Clinic Network"
+                                class="w-full h-full object-cover opacity-80 invert custom-map-filter">
+
+                            <!-- Interactive Points (Recalibrated for new map) -->
+                            <!-- Shanghai (Yangtze Estuary) -->
+                            <div class="absolute top-[48%] left-[34%] map-point cursor-pointer group/pt">
+                                <div class="relative">
+                                    <div
+                                        class="w-3.5 h-3.5 bg-brand-red rounded-full relative z-10 map-marker shadow-lg border-2 border-white">
+                                    </div>
+                                    <div class="absolute inset-0 w-3.5 h-3.5 bg-brand-red rounded-full map-ping"></div>
+                                    <div
+                                        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 whitespace-nowrap marker-label shadow-sm">
+                                        <div
+                                            class="bg-white/90 backdrop-blur-sm px-2 py-0.5 border border-gray-100 rounded-sm">
+                                            <span
+                                                class="text-[9px] tracking-widest uppercase font-bold text-deep-charcoal">Shanghai</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Taipei (Northern tip of Taiwan Island) -->
+                            <div class="absolute top-[75%] left-[36%] map-point cursor-pointer group/pt">
+                                <div class="relative">
+                                    <div
+                                        class="w-3.5 h-3.5 bg-brand-red rounded-full relative z-10 map-marker shadow-lg border-2 border-white">
+                                    </div>
+                                    <div class="absolute inset-0 w-3.5 h-3.5 bg-brand-red rounded-full map-ping"></div>
+                                    <div
+                                        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 whitespace-nowrap marker-label shadow-sm">
+                                        <div
+                                            class="bg-white/90 backdrop-blur-sm px-2 py-0.5 border border-gray-100 rounded-sm">
+                                            <span
+                                                class="text-[9px] tracking-widest uppercase font-bold text-deep-charcoal">Taipei</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tokyo (Central-East Honshu) -->
+                            <div class="absolute top-[28%] left-[82%] map-point cursor-pointer group/pt">
+                                <div class="relative">
+                                    <div
+                                        class="w-3.5 h-3.5 bg-brand-red rounded-full relative z-10 map-marker shadow-lg border-2 border-white">
+                                    </div>
+                                    <div class="absolute inset-0 w-3.5 h-3.5 bg-brand-red rounded-full map-ping"></div>
+                                    <div
+                                        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 whitespace-nowrap marker-label shadow-sm">
+                                        <div
+                                            class="bg-white/90 backdrop-blur-sm px-2 py-0.5 border border-gray-100 rounded-sm">
+                                            <span
+                                                class="text-[9px] tracking-widest uppercase font-bold text-deep-charcoal">Tokyo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Connection Lines (Responsive Percentage Coordinates) -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20"
+                                viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <!-- Tokyo (82, 28) to Shanghai (34, 48) -->
+                                <path d="M82 28 Q 60 40 34 48" fill="none" stroke="#9D1A1A" stroke-width="0.3"
+                                    stroke-dasharray="1 1" />
+                                <!-- Tokyo (82, 28) to Taipei (36, 75) -->
+                                <path d="M82 28 Q 60 60 36 75" fill="none" stroke="#9D1A1A" stroke-width="0.3"
+                                    stroke-dasharray="1 1" />
+                            </svg>
+                        </div>
+                        <div
+                            class="absolute -bottom-8 -right-8 w-48 h-48 bg-brand-red/5 p-8 hidden md:block border border-brand-red/10 -z-10">
+                            <div class="text-6xl font-serif text-brand-red/10">ASIA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Cooperative Clinics Section -->
+        <section class="pt-10 pb-16 md:pt-16 md:pb-24 bg-white relative border-t border-gray-50" id="clinics">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="text-center mb-12 md:mb-16">
+                    <h3 class="text-3xl md:text-5xl font-serif leading-tight mb-6" data-i18n="clinics.title">
+                        世界合作診所
+                    </h3>
+                    <div class="w-px h-16 bg-brand-red mx-auto"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Taiwan Clinic -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden aspect-[4/3] mb-6 shadow-xl rounded-sm">
+                            <div
+                                class="absolute inset-0 bg-deep-charcoal/0 group-hover:bg-deep-charcoal/10 transition-colors duration-500 z-10">
+                            </div>
+                            <img src="assets/healthonlyClinic.jpg" alt="Health Only Clinic Taiwan"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+                        </div>
+                        <div class="text-center">
+                            <h4 class="text-xl md:text-2xl font-serif mb-3 text-deep-charcoal"
+                                data-i18n="clinics.taiwan.name">唯有健康診所</h4>
+                            <p class="text-[10px] tracking-widest uppercase text-brand-red mb-4"
+                                data-i18n="clinics.taiwan.loc">TAIWAN</p>
+
+                        </div>
+                    </div>
+
+                    <!-- Japan Clinic -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden aspect-[4/3] mb-6 shadow-xl rounded-sm">
+                            <div
+                                class="absolute inset-0 bg-deep-charcoal/0 group-hover:bg-deep-charcoal/10 transition-colors duration-500 z-10">
+                            </div>
+                            <img src="assets/c5_clinic_studio.png" alt="C5 Clinic Japan"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+                        </div>
+                        <div class="text-center">
+                            <h4 class="text-xl md:text-2xl font-serif mb-3 text-deep-charcoal"
+                                data-i18n="clinics.japan.name">C5 Clinic 診所</h4>
+                            <p class="text-[10px] tracking-widest uppercase text-brand-red mb-4"
+                                data-i18n="clinics.japan.loc">JAPAN</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Introduction Section -->
+        <section class="py-16 md:py-24 bg-white relative overflow-hidden" id="product">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 md:gap-24 items-center">
+                    <div class="relative order-2 lg:order-1">
+                        <div
+                            class="aspect-square bg-soft-gray shadow-2xl rounded-sm overflow-hidden border border-gray-100 relative group">
+                            <img src="assets/product_shot.png" alt="Pre NAD+ 500mg"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
+                        </div>
+                        <div class="absolute -top-6 -left-6 w-32 h-32 bg-brand-red/5 -z-10 border border-brand-red/10">
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 order-1 lg:order-2">
+                        <div class="text-brand-red tracking-dramatic text-[12px] mb-6 uppercase font-bold"
+                            data-i18n="product.label">產品介紹</div>
+                        <div class="mb-4">
+                            <span class="text-xl md:text-2xl font-serif text-brand-red" data-i18n="product.origin">MADE
+                                IN JAPAN 日本製造</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl mb-8 font-serif leading-tight" data-i18n="product.name">
+                            Pre NAD+ 500mg</h3>
+                        <p class="text-base text-gray-600 leading-relaxed mb-12 max-w-xl" data-i18n="product.desc">
+                            產品符合 USP（美國藥典）或 JP（日本藥典） 等標準。<br>原料「起源於天然食物中的維生素B3與胺基酸」<br>成分經過「生物酵素轉化純化」而得的高純度製品。
+                        </p>
+
+                        <div class="grid gap-8">
+                            <div class="flex gap-6 items-start">
+                                <div class="w-12 h-px bg-brand-red mt-3"></div>
+                                <div>
+                                    <h4 class="text-lg font-serif mb-2 text-deep-charcoal" data-i18n="product.f1.title">
+                                        純度 ≥ 99%</h4>
+                                    <p class="text-xs text-gray-600 leading-relaxed" data-i18n="product.f1.desc">
+                                        採用生物酶法萃取，確保極致純淨度，符合國際科學認證標準。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 items-start">
+                                <div class="w-12 h-px bg-brand-red mt-3"></div>
+                                <div>
+                                    <h4 class="text-lg font-serif mb-2 text-deep-charcoal" data-i18n="product.f2.title">
+                                        頂尖凍結乾燥</h4>
+                                    <p class="text-xs text-gray-600 leading-relaxed" data-i18n="product.f2.desc">
+                                        透過領先的低溫乾燥技術，完整鎖住活性成分，提升吸收效率與穩定性。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 items-start">
+                                <div class="w-12 h-px bg-brand-red mt-3"></div>
+                                <div>
+                                    <h4 class="text-lg font-serif mb-2 text-deep-charcoal" data-i18n="product.f3.title">
+                                        MADE IN JAPAN</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 md:py-24 bg-soft-gray" id="science">
+            <div class="max-w-[1400px] mx-auto px-6 md:px-8">
+                <div class="mb-12 md:mb-16 flex flex-col items-center text-center max-w-4xl mx-auto">
+                    <div class="text-brand-red tracking-dramatic text-[15px] mb-4 uppercase font-bold"
+                        data-i18n="science.label">NAD+ 與人體的關係</div>
+                    <h2 class="text-[14px] text-gray-600 font-light leading-relaxed mb-8" data-i18n="science.title">
+                        NAD+是細胞內能量生成不可或缺的輔酶，並具有活化長壽基因的Sirtuins基因的功能，NMN 作為 NAD⁺ 的前驅物，進入體內後可快速轉換為
+                        NAD⁺。然而隨著年齡增長，人體內的NAD+的水平會顯著下降。
+                    </h2>
+                    <div class="w-px h-8 md:h-12 bg-gray-300"></div>
+                </div>
+                <div class="relative">
+                    <div class="flex justify-center relative">
+                        <div class="relative pt-0 md:pt-12 max-w-2xl w-full text-center">
+                            <h4 class="text-2xl mb-6 font-serif" data-i18n="science.age">體內NAD+濃度隨年齡變化</h4>
+                            <div class="bg-white p-8 border border-gray-100">
+                                <div class="h-32 flex items-end gap-2 justify-center">
+                                    <div class="w-12 bg-brand-red/10 h-[100%]"></div>
+                                    <div class="w-12 bg-brand-red/20 h-[80%]"></div>
+                                    <div class="w-12 bg-brand-red/40 h-[50%]"></div>
+                                    <div class="w-12 bg-brand-red/60 h-[30%]"></div>
+                                    <div class="w-12 bg-brand-red h-[15%]"></div>
+                                </div>
+                                <p class="mt-6 text-xs text-gray-600 leading-relaxed max-w-lg mx-auto"
+                                    data-i18n="science.age.content">
+                                    研究表明，從20歲開始，NAD+水平就逐漸降低，到了50歲時，可能已下降至年輕時期的一半。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 md:py-24 bg-white" id="benefits">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="text-center mb-20 md:mb-32">
+                    <h3 class="text-4xl md:text-6xl font-serif mb-6">
+                        <span data-i18n="benefits.title">NMN目前研究</span>
+                        <span class="text-brand-red" data-i18n="benefits.title.span">有效功能有哪些？</span>
+                    </h3>
+                    <p class="text-gray-600 font-light leading-relaxed max-w-3xl mx-auto" data-i18n="benefits.desc">
+                        從哈佛醫學院的發現到您的日常：科學實證的逆齡奇蹟
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center">
+                    <!-- Left Side Benefits -->
+                    <div class="space-y-12 md:space-y-16">
+                        <!-- Benefit 01 -->
+                        <div class="text-right group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.01.title">啟動粒線體與長壽基因Sirtuins</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.01.desc">促進
+                                SIRT1、SIRT3 活性，改善粒線體功能與能量代謝。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.01.ref">- 哈佛大學, Sinclair, Cell, 2013</p>
+                        </div>
+                        <!-- Benefit 02 -->
+                        <div class="text-right group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.02.title">燃燒脂肪</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.02.desc">
+                                提升脂肪代謝效能，科學驗證體態優化。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.02.ref">- 美國華盛頓大學 Yoshino et al., Science, 2021</p>
+                        </div>
+                        <!-- Benefit 03 -->
+                        <div class="text-right group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.03.title">降低血糖</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.03.desc">
+                                提升肌肉等組織的胰島素敏感性、改善葡萄糖代謝、減少代謝症候群風險。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.03.ref">- 美國華盛頓大學 Yoshino et al., Science, 2021</p>
+                        </div>
+                        <!-- Benefit 04 -->
+                        <div class="text-right group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.04.title">自律神經</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.04.desc">NAD+
+                                涉及神經元代謝，間接協助自律神經平衡。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.04.ref">- 哈佛大學 Anthony J Covarrubias, Nature Reviews Molecular Cell
+                                Biology, 2020</p>
+                        </div>
+                    </div>
+
+                    <!-- Center Illustration -->
+                    <div class="relative py-8 md:py-12 px-4 flex justify-center items-center overflow-visible">
+                        <div class="absolute inset-0 bg-brand-red/5 rounded-full blur-3xl opacity-30 -z-10"></div>
+                        <div class="relative w-full max-w-[320px] md:max-w-[400px]">
+                            <img src="assets/HumanwithNMN_.png" alt="NMN Benefits Infographic"
+                                class="w-full h-auto drop-shadow-2xl">
+                        </div>
+                    </div>
+
+                    <!-- Right Side Benefits -->
+                    <div class="space-y-12 md:space-y-16">
+                        <!-- Benefit 05 -->
+                        <div class="text-left group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.05.title">抗衰老</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.05.desc">促進 NAD+
+                                路徑活化，從分子層面支持「延長健康期」的抗衰老訴求。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.05.ref">- 挪威 University of Oslo, Trends in Molecular Medicine, 2017
+                            </p>
+                        </div>
+                        <!-- Benefit 06 -->
+                        <div class="text-left group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.06.title">腦霧與認知障礙</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.06.desc">
+                                提升記憶學習能力與認知功能，改善大腦活力。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.06.ref">- 雪梨新南威爾斯州威爾斯大學, Nutrients, 2022</p>
+                        </div>
+                        <!-- Benefit 07 -->
+                        <div class="text-left group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.07.title">提高睡眠品質</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.07.desc">
+                                睡眠品質提升後，日間精神疲勞感顯著下降。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.07.ref">- 日本筑波大學, Nutrients, 2022</p>
+                        </div>
+                        <!-- Benefit 08 -->
+                        <div class="text-left group">
+                            <h5 class="text-brand-red font-serif text-lg md:text-xl mb-2 "
+                                data-i18n="benefits.08.title">糖尿病支持</h5>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-2" data-i18n="benefits.08.desc">
+                                提升葡萄糖處理率，對胰島素的敏感性顯著改善。</p>
+                            <p class="text-[9px] text-gray-600 tracking-wider transition-colors group-hover:text-brand-red"
+                                data-i18n="benefits.08.ref">- 華盛頓大學, Science, 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 md:py-24 bg-white border-t border-gray-100" id="quality">
+            <div class="max-w-5xl mx-auto px-6 md:px-8">
+                <div class="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                    <div>
+                        <h2 class="text-brand-red tracking-dramatic text-[10px] md:text-xs mb-4 uppercase font-bold"
+                            data-i18n="quality.title">品質認證</h2>
+                        <h3 class="text-[25px] md:text-[43px] font-serif mb-6" data-i18n="quality.subtitle">通過日本第三方機構
+                            JFRL 檢驗</h3>
+                        <p class="text-base text-gray-600 font-light leading-relaxed max-w-xl" data-i18n="quality.desc">
+                            產品具備高純度、安全性，無微生物汙染、無重金屬超標</p>
+                    </div>
+                </div>
+
+                <!-- Report Overview Image -->
+                <div class="mt-12 md:mt-20 flex justify-center">
+                    <div class="relative max-w-4xl w-full">
+                        <img src="assets/report_overview.png" alt="JFRL Inspection Report"
+                            class="w-full h-auto shadow-xl border border-gray-100 rounded-sm">
+                        <div class="absolute -inset-4 bg-brand-red/5 -z-10 blur-2xl opacity-50"></div>
+                    </div>
+                </div>
+
+                <!-- Report Details Text -->
+                <div class="mt-12 md:mt-16 max-w-4xl mx-auto border-l-2 border-brand-red/20 pl-6 md:pl-8">
+                    <p class="text-xs md:text-sm font-bold text-deep-charcoal mb-4" data-i18n="quality.ref.title">
+                        檢驗來源經由：</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="text-[11px] md:text-xs text-gray-600 leading-relaxed list-disc list-inside marker:text-brand-red"
+                            data-i18n="quality.ref.list.1">1. 日本第三方機構 JFRL （日本食品分析中心）檢驗</li>
+                        <li class="text-[11px] md:text-xs text-gray-600 leading-relaxed list-disc list-inside marker:text-brand-red"
+                            data-i18n="quality.ref.list.2">2. 日本東京先端醫學研究所（一般財團法人日本東京先端醫學研究所）</li>
+                        <li class="text-[11px] md:text-xs text-gray-600 leading-relaxed list-disc list-inside marker:text-brand-red"
+                            data-i18n="quality.ref.list.3">3. 第三方 GLP 檢測實驗室執行毒理與微生物檢測</li>
+                    </ul>
+                    <p class="text-[11px] md:text-xs text-brand-red leading-relaxed " data-i18n="quality.ref.result">
+                        檢驗結果顯示，產品具備高純度、安全性，無微生物汙染、無重金屬超標，且內毒素含量符合規範，適合應用的注射型製劑或高端營養補充用途。
+                    </p>
+                </div>
+        </section>
+        <section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden" id="contact">
+            <div class="absolute inset-0 bg-cover bg-center grayscale opacity-10"
+                style="background-image: url('assets/contact_bg.jpg');">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
+            <div class="relative z-10 text-center max-w-2xl px-8">
+                <h3 class="text-4xl md:text-6xl mb-8 md:mb-12 font-serif">
+                    <span data-i18n="contact.title">開啟您的</span>
+                    <span data-i18n="contact.title.span">永恆活力</span>
+                    <span data-i18n="contact.title.end">之旅</span>
+                </h3>
+                <p class="text-gray-600 font-light mb-8 md:mb-12 leading-relaxed" data-i18n="contact.desc">
+                    預約專屬科學諮詢，由專業團隊為您解析細胞修復的個人化方案，重新定義您的年齡邊界與健康未來。
+                </p>
+                <a href="https://lin.ee/hA0fzeC" target="_blank"
+                    class="inline-block px-12 md:px-16 py-5 md:py-6 bg-deep-charcoal text-white text-[10px] md:text-xs tracking-dramatic uppercase hover:bg-brand-red transition-all shadow-2xl text-center"
+                    data-i18n="contact.btn">
+                    立即預約諮詢
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-white py-12 md:py-20 border-t border-gray-100">
+        <div class="max-w-[1800px] mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <div class="mb-4 md:mb-6">
+                        <img src="assets/logo.png" alt="EXOEVER Logo" class="h-6 md:h-8 w-auto mx-auto md:mx-0">
+                    </div>
+                    <p class="text-[10px] text-gray-600 leading-relaxed" data-i18n="footer.slogan">
+                        ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />電話:080-2775-1122
+                    </p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-4">
+
+
+                </div>
+            </div>
+            <div
+                class="mt-12 md:mt-16 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-gray-600 tracking-widest uppercase">
+                <span data-i18n="footer.rights">© 2026 EXOEVER. ALL RIGHTS RESERVED.</span>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            "tw": {
+                "current_lang": "繁體中文",
+                "nav.features": "首頁",
+                "nav.product": "產品介紹",
+                "nav.science": "科學研究",
+                "nav.quality": "品質認證",
+                "nav.contact": "聯繫我們",
+                "nav.consult": "立即諮詢",
+                "hero.label": "頂級日本科學配方",
+                "hero.subtitle": "重新定義長壽哲學",
+                "hero.desc": "NAD+細胞年輕的關鍵密碼。來自日本的配方，利用天然原料的生物酵素純化技術，提供高純度99%的高濃度，重啟生命能量。",
+                "hero.explore": "探索NAD+的科學深度",
+                "features.source": "EXOEVER與全球專業診所合作",
+                "features.desc": "EXOEVER 與上海、台灣、日本的多家頂尖診所建立深度合作，以長壽轉化科學提供精準服務，持續為全球客戶研發抗衰與健康產品。",
+                "features.tag1": "上海醫療聯網",
+                "features.tag2": "台灣專家合作",
+                "features.tag3": "日本領先科研",
+                "clinics.title": "世界合作診所",
+                "clinics.taiwan.name": "唯有健康診所",
+                "clinics.taiwan.loc": "台灣 TAIWAN",
+                "clinics.taiwan.desc": "專注於個人化健康管理與細胞修復，提供頂級的醫療服務體驗。",
+                "clinics.japan.name": "C5 Clinic 診所",
+                "clinics.japan.loc": "日本 JAPAN",
+                "clinics.japan.desc": "結合尖端再生醫療技術，致力於抗衰老與長壽科學的臨床應用。",
+                "product.label": "產品介紹",
+                "product.origin": "MADE IN JAPAN 日本製造",
+                "product.name": "Pre NAD+ 500mg",
+                "product.desc": "產品符合 USP（美國藥典）或 JP（日本藥典） 等標準。<br>原料「起源於天然食物中的維生素B3與胺基酸」<br>成分經過「生物酵素轉化純化」而得的高純度製品。",
+                "product.f1.title": "純度 ≥ 99%",
+                "product.f1.desc": "採用生物酶法萃取，確保極致純淨度，符合國際科學認證標準。",
+                "product.f2.title": "頂尖凍結乾燥",
+                "product.f2.desc": "透過領先的低溫乾燥技術，完整鎖住活性成分，提升吸收效率與穩定性。",
+                "product.f3.title": "MADE IN JAPAN",
+                "product.f3.desc": "",
+                "science.title": "NAD+是細胞內能量生成不可或缺的輔酶，並具有活化長壽基因的Sirtuins基因的功能，NMN 作為 NAD⁺ 的前驅物，進入體內後可快速轉換為 NAD⁺。然而隨著年齡增長，人體內的NAD+的水平會顯著下降。",
+                "science.label": "NAD+ 與人體的關係",
+                "science.age": "體內NAD+濃度隨年齡變化",
+                "science.age.desc": "體內濃度隨年齡變化",
+                "science.age.content": "研究表明，從20歲開始，NAD+水平就逐漸降低，到了50歲時，可能已下降至年輕時期的一半。",
+                "science.efficiency": "高效率吸收",
+                "science.efficiency.desc": "血漿濃度上升曲線指標",
+                "science.efficiency.content": "口服高純度 NMN 能有效提升血液中 NAD+ 濃度，維持穩定代謝機能。",
+                "science.atp": "ATP 能量合成",
+                "science.atp.desc": "粒線體能量代謝機制",
+                "science.atp.content": "NAD⁺ 可啟動粒線體能量代謝<br />進入細胞後促進 ATP 生成，進而支持細胞修復。",
+                "benefits.title": "NMN目前研究",
+                "benefits.title.span": "有效功能有哪些？",
+                "benefits.desc": "從哈佛醫學院的發現到您的日常：科學實證的逆齡奇蹟",
+                "benefits.01.title": "啟動粒線體與長壽基因Sirtuins",
+                "benefits.01.desc": "促進 SIRT1、SIRT3 活性，改善粒線體功能與能量代謝。",
+                "benefits.01.ref": "- 哈佛大學, Sinclair, Cell, 2013",
+                "benefits.02.title": "燃燒脂肪",
+                "benefits.02.desc": "提升脂肪代謝效能，科學驗證體態優化。",
+                "benefits.02.ref": "- 美國華盛頓大學 Yoshino et al., Science, 2021",
+                "benefits.03.title": "降低血糖",
+                "benefits.03.desc": "提升肌肉等組織的胰島素敏感性、改善葡萄糖代謝、減少代謝症候群風險。",
+                "benefits.03.ref": "- 美國華盛頓大學 Yoshino et al., Science, 2021",
+                "benefits.04.title": "自律神經",
+                "benefits.04.desc": "NAD+ 涉及神經元代謝，間接協助自律神經平衡。",
+                "benefits.04.ref": "- 哈佛大學 Anthony J Covarrubias, Nature Reviews Molecular Cell Biology, 2020",
+                "benefits.05.title": "抗衰老",
+                "benefits.05.desc": "促進 NAD+ 路徑活化，從分子層面支持「延長健康期」的抗衰老訴求。",
+                "benefits.05.ref": "- 挪威 University of Oslo, Trends in Molecular Medicine, 2017",
+                "benefits.06.title": "腦霧與認知障礙",
+                "benefits.06.desc": "提升記憶學習能力與認知功能，改善大腦活力。",
+                "benefits.06.ref": "- 雪梨新南威爾斯州威爾斯大學, Nutrients, 2022",
+                "benefits.07.title": "提高睡眠品質",
+                "benefits.07.desc": "睡眠品質提升後，日間精神疲勞感顯著下降。",
+                "benefits.07.ref": "- 日本筑波大學, Nutrients, 2022",
+                "benefits.08.title": "糖尿病支持",
+                "benefits.08.desc": "提升葡萄糖處理率，對胰島素的敏感性顯著改善。",
+                "benefits.08.ref": "- 華盛頓大學, Science, 2021",
+                "benefits.nad_levels": "體內 NAD+ 濃度指標",
+                "benefits.nad_age": "50歲時減少約 50%",
+                "benefits.label.energy": "能量代謝",
+                "benefits.label.dna": "基因修復與抗衰",
+                "benefits.label.neuron": "神經與免疫",
+                "benefits.label.metabolism": "代謝與胰島素",
+                "quality.title": "品質認證",
+                "quality.subtitle": "通過日本第三方機構 <img src='assets/JFRL_Logo.png' class='h-10 md:h-14 inline-block mx-2 align-middle' alt='JFRL'> 檢驗",
+                "quality.desc": "產品具備高純度、安全性，無微生物汙染、無重金屬超標",
+                "quality.ref.title": "檢驗來源經由：",
+                "quality.ref.list.1": "1. 日本第三方機構 JFRL （日本食品分析中心）檢驗",
+                "quality.ref.list.2": "2. 日本東京先端醫學研究所（一般財團法人日本東京先端醫學研究所）",
+                "quality.ref.list.3": "3. 第三方 GLP 檢測實驗室執行毒理與微生物檢測",
+                "quality.ref.result": "檢驗結果顯示，產品具備高純度、安全性，無微生物汙染、無重金屬超標，且內毒素含量符合規範，適合應用於注射型製劑或高端營養補充用途。",
+                "quality.origin": "純正日本來源 PURE JAPANESE ORIGIN",
+                "quality.table.item": "檢測項目 (Analytical Item)",
+                "quality.table.result": "檢測結果 (Result)",
+                "quality.table.method": "檢測方法 (Method)",
+                "contact.title": "開啟您的",
+                "contact.title.span": "永恆活力",
+                "contact.title.end": "之旅",
+                "contact.desc": "預約專屬科學諮詢，由專業團隊為您解析細胞修復的個人化方案，重新定義您的年齡邊界與健康未來。",
+                "contact.btn": "立即預約諮詢",
+                "footer.slogan": "ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />電話:080-2775-1122",
+                "footer.consult": "立即諮詢 CONSULT NOW",
+                "footer.contact": "聯絡我們：INFO@EXOEVER.COM",
+                "footer.rights": "© 2026 EXOEVER. ALL RIGHTS RESERVED.",
+                "footer.madein": "MADE IN JAPAN"
+            },
+            "en": {
+                "current_lang": "ENGLISH",
+                "nav.features": "HOME",
+                "nav.product": "PRODUCT",
+                "nav.science": "SCIENCE",
+                "nav.quality": "QUALITY",
+                "nav.contact": "CONTACT",
+                "nav.consult": "CONSULT NOW",
+                "hero.label": "PREMIUM JAPANESE FORMULA",
+                "hero.subtitle": "REDEFINING LONGEVITY PHILOSOPHY",
+                "hero.desc": "NAD+, the key to cellular youth. Formula from Japan, using natural biological enzyme purification technology, providing 99% high purity concentration to restart life energy.",
+                "hero.explore": "EXPLORE NAD+ SCIENCE",
+                "features.source": "EXOEVER Global Clinic Partnerships",
+                "features.desc": "EXOEVER establishes deep collaborations with top clinics in Shanghai, Taiwan, and Japan, providing precision services through longevity translational science, and continuously developing anti-aging and health products for global clients.",
+                "features.tag1": "Shanghai Network",
+                "features.tag2": "Taiwan Partnership",
+                "features.tag3": "Japan Leadership",
+                "clinics.title": "Global Cooperative Clinics",
+                "clinics.taiwan.name": "Health Only Clinic",
+                "clinics.taiwan.loc": "TAIWAN",
+                "clinics.taiwan.desc": "Focusing on personalized health management and cell repair, providing a top-tier medical service experience.",
+                "clinics.japan.name": "C5 Clinic",
+                "clinics.japan.loc": "JAPAN",
+                "clinics.japan.desc": "Combining cutting-edge regenerative medical technology, dedicated to the clinical application of anti-aging and longevity science.",
+                "product.label": "PRODUCT INTRODUCTION",
+                "product.origin": "MADE IN JAPAN",
+                "product.name": "Pre NAD+ 500mg",
+                "product.desc": "Complies with USP or JP standards.<br>Raw materials originate from Vitamin B3 and amino acids in natural foods.<br>Ingredients are high-purity products obtained through biological enzyme conversion.",
+                "product.f1.title": "Purity ≥ 99%",
+                "product.f1.desc": "Extracted using biological enzyme methods to ensure extreme purity, meeting international scientific standards.",
+                "product.f2.title": "Advanced Freeze-Drying",
+                "product.f2.desc": "Leading low-temperature drying technology locks in active ingredients, enhancing absorption and stability.",
+                "product.f3.title": "MADE IN JAPAN",
+                "product.f3.desc": "",
+                "science.title": "NAD+ is an essential coenzyme for cellular energy production and activates longevity genes (Sirtuins). As a precursor, NMN rapidly converts to NAD+ in the body. However, NAD+ levels decline significantly with age.",
+                "science.label": "Relationship between NAD+ and Human Body",
+                "science.age": "NAD+ CONCENTRATION CHANGES WITH AGE",
+                "science.age.desc": "LEVELS DECLINE WITH AGE",
+                "science.age.content": "Studies show that starting from age 20, NAD+ levels gradually decrease, and by age 50, they may have dropped to half of youthful levels.",
+                "science.efficiency": "EFFICIENT ABSORPTION",
+                "science.efficiency.desc": "PLASMA CONCENTRATION INDEX",
+                "science.efficiency.content": "Oral high-purity NMN effectively increases blood NAD+ concentration, maintaining stable metabolic function.",
+                "science.atp": "ATP ENERGY SYNTHESIS",
+                "science.atp.desc": "MITOCHONDRIAL METABOLISM",
+                "science.atp.content": "NAD+ can activate mitochondrial energy metabolism.<br />It promotes ATP generation after entering cells, supporting cellular repair.",
+                "benefits.title": "Current NMN Research",
+                "benefits.title.span": "What are the effective functions?",
+                "benefits.desc": "From Harvard Medical School findings to your daily life: the science-backed miracle of age reversal.",
+                "benefits.01.title": "Activate Mitochondria & Sirtuins",
+                "benefits.01.desc": "Promotes SIRT1 and SIRT3 activity, improving mitochondrial function and energy metabolism.",
+                "benefits.01.ref": "- Harvard University, Sinclair, Cell, 2013",
+                "benefits.02.title": "Fat Burning",
+                "benefits.02.desc": "Enhances fat metabolism efficiency, scientifically verified body optimization.",
+                "benefits.02.ref": "- Washington University, Yoshino et al., Science, 2021",
+                "benefits.03.title": "Lower Blood Sugar",
+                "benefits.03.desc": "Improves insulin sensitivity in muscles and other tissues, glucose metabolism, and metabolic syndrome risk.",
+                "benefits.03.ref": "- Washington University, Yoshino et al., Science, 2021",
+                "benefits.04.title": "Autonomic Nervous System",
+                "benefits.04.desc": "NAD+ involves neuronal metabolism, assisting autonomic balance.",
+                "benefits.04.ref": "- Harvard University, Nature Reviews Molecular Cell Biology, 2020",
+                "benefits.05.title": "Anti-Aging",
+                "benefits.05.desc": "Promotes NAD+ pathway activation, supporting 'healthspan extension' at the molecular level.",
+                "benefits.05.ref": "- University of Oslo, Trends in Molecular Medicine, 2017",
+                "benefits.06.title": "Brain Fog & Cognition",
+                "benefits.06.desc": "Improves memory, learning ability, and cognitive function.",
+                "benefits.06.ref": "- UNSW Sydney, Nutrients, 2022",
+                "benefits.07.title": "Improve Sleep Quality",
+                "benefits.07.desc": "Significant decrease in daytime mental fatigue after sleep quality improvement.",
+                "benefits.07.ref": "- University of Tsukuba, Nutrients, 2022",
+                "benefits.08.title": "Diabetes Support",
+                "benefits.08.desc": "Higher glucose disposal rate and improved insulin sensitivity in pre-diabetic women.",
+                "benefits.08.ref": "- Washington University, Science, 2021",
+                "benefits.nad_levels": "NAD+ LEVELS",
+                "benefits.nad_age": "-50% by age 50",
+                "benefits.label.energy": "ENERGY<br>METABOLISM",
+                "benefits.label.dna": "DNA REPAIR &<br>ANTI-AGING",
+                "benefits.label.neuron": "NEURON &<br>IMMUNE",
+                "benefits.label.metabolism": "METABOLISM &<br>INSULIN",
+                "quality.title": "QUALITY CERTIFIED",
+                "quality.subtitle": "PASSED JAPAN'S THIRD-PARTY <img src='assets/JFRL_Logo.png' class='h-10 md:h-14 inline-block mx-2 align-middle' alt='JFRL'> INSPECTION",
+                "quality.desc": "Our products ensure high purity and safety, with no microbial contamination or heavy metal exceedances.",
+                "quality.ref.title": "Inspection Sources:",
+                "quality.ref.list.1": "1. Japan Food Research Laboratories (JFRL) inspection",
+                "quality.ref.list.2": "2. Tokyo Institute of Advanced Medicine (General Incorporated Foundation)",
+                "quality.ref.list.3": "3. Third-party GLP laboratory for toxicology and microbial testing",
+                "quality.ref.result": "Results show high purity and safety, with no microbial contamination or heavy metal exceedances. Endotoxin levels meet standards, suitable for injectable preparations or premium nutritional supplements.",
+                "quality.origin": "PURE JAPANESE ORIGIN",
+                "quality.table.item": "ANALYTICAL ITEM",
+                "quality.table.result": "RESULT",
+                "quality.table.method": "METHOD",
+                "contact.title": "START YOUR",
+                "contact.title.span": "ETERNAL VITALITY",
+                "contact.title.end": "JOURNEY",
+                "contact.desc": "Book a dedicated scientific consultation, and our professional team will analyze a personalized cellular repair plan for you.",
+                "contact.btn": "BOOK CONSULTATION",
+                "footer.slogan": "ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />TEL: 080-2775-1122",
+                "footer.consult": "CONSULT NOW",
+                "footer.contact": "CONTACT: INFO@EXOEVER.COM",
+                "footer.rights": "© 2026 EXOEVER. ALL RIGHTS RESERVED.",
+                "footer.madein": "MADE IN JAPAN"
+            },
+            "cn": {
+                "current_lang": "简体中文",
+                "nav.features": "首页",
+                "nav.product": "产品介绍",
+                "nav.science": "科学研究",
+                "nav.quality": "品质认证",
+                "nav.contact": "联系我们",
+                "nav.consult": "立即咨询",
+                "hero.label": "顶级日本科学配方",
+                "hero.subtitle": "重新定义长寿哲学",
+                "hero.desc": "NAD+细胞年轻的关键密码。来自日本的配方，利用天然原料的生物酵素纯化技术，提供高纯度99%的高浓度，重启生命能量。",
+                "hero.explore": "探索NAD+的科学深度",
+                "features.source": "EXOEVER与全球专业诊所合作",
+                "features.desc": "EXOEVER 与上海、台湾、日本的多家顶尖诊所建立深度合作，以长寿转化科学提供精准服务，持续为全球客户研发抗衰与健康产品。",
+                "features.tag1": "上海医疗联网",
+                "features.tag2": "台湾专家合作",
+                "features.tag3": "日本领先科研",
+                "clinics.title": "世界合作诊所",
+                "clinics.taiwan.name": "唯有健康诊所",
+                "clinics.taiwan.loc": "台湾 TAIWAN",
+                "clinics.taiwan.desc": "专注于个人化健康管理与细胞修复，提供顶级的医疗服务体验。",
+                "clinics.japan.name": "C5 Clinic 诊所",
+                "clinics.japan.loc": "日本 JAPAN",
+                "clinics.japan.desc": "结合尖端再生医疗技术，致力于抗衰老与长寿科学的临床应用。",
+                "product.label": "产品介绍",
+                "product.origin": "MADE IN JAPAN 日本制造",
+                "product.name": "Pre NAD+ 500mg",
+                "product.desc": "产品符合 USP（美国药典）或 JP（日本药典） 等标准。<br>原料「起源于天然食物中的维生素B3与氨基酸」<br>成分经过「生物酵素转化纯化」而得的高纯度制品。",
+                "product.f1.title": "纯度 ≥ 99%",
+                "product.f1.desc": "采用生物酶法萃取，确保极致纯净度，符合国际科学认证标准。",
+                "product.f2.title": "顶尖冻结干燥",
+                "product.f2.desc": "通过领先的低温干燥技术，完整锁住活性成分，提升吸收效率与稳定性。",
+                "product.f3.title": "MADE IN JAPAN",
+                "product.f3.desc": "",
+                "science.title": "NAD+是细胞内能量生成不可或缺的辅酶，并具有活化长寿基因的Sirtuins基因的功能，NMN 作为 NAD⁺ 的前驱物，进入体内后可快速转换为 NAD⁺。然而随着年龄增长，人体內的NAD+的水平会显著下降。",
+                "science.label": "NAD+ 与人体的关系",
+                "science.age": "体内NAD+浓度随年龄变化",
+                "science.age.desc": "体内浓度随年龄变化",
+                "science.age.content": "研究表明，从20岁开始，NAD+水平就逐渐降低，到了50岁时，可能已下降至年轻时期的一半。",
+                "science.efficiency": "高效率吸收",
+                "science.efficiency.desc": "血浆浓度上升曲线指标",
+                "science.efficiency.content": "口服高纯度 NMN 能有效提升血液中 NAD+ 浓度，维持稳定代谢机能。",
+                "science.atp": "ATP 能量合成",
+                "science.atp.desc": "粒线体能量代谢机制",
+                "science.atp.content": "NAD⁺ 可启动粒线体能量代谢<br />进入细胞后促进 ATP 生成，进而支持细胞修复。",
+                "benefits.title": "NMN目前研究",
+                "benefits.title.span": "有效功能有哪些？",
+                "benefits.desc": "从哈佛医学院的发现到您的日常：科学实证的逆龄奇迹",
+                "benefits.01.title": "启动粒线体与长寿基因Sirtuins",
+                "benefits.01.desc": "促进 SIRT1、SIRT3 活性，改善粒线体功能与能量代谢。",
+                "benefits.01.ref": "- 哈佛大学, Sinclair, Cell, 2013",
+                "benefits.02.title": "燃烧脂肪",
+                "benefits.02.desc": "提升脂肪代谢效能，科学验证体态优化。",
+                "benefits.02.ref": "- 美国华盛顿大学 Yoshino et al., Science, 2021",
+                "benefits.03.title": "降低血糖",
+                "benefits.03.desc": "提升肌肉等组织的胰岛素敏感性、改善葡萄糖代谢、减少代谢症候群风险。",
+                "benefits.03.ref": "- 美国华盛顿大学 Yoshino et al., Science, 2021",
+                "benefits.04.title": "自律神经",
+                "benefits.04.desc": "NAD+ 涉及神经元代谢，间接协助自律神经平衡。",
+                "benefits.04.ref": "- 哈佛大学, Nature Reviews Molecular Cell Biology, 2020",
+                "benefits.05.title": "抗衰老",
+                "benefits.05.desc": "促进 NAD+ 路径活化，从分子层面支持「延长健康期」的抗衰老诉求。",
+                "benefits.05.ref": "- 挪威 University of Oslo, Trends in Molecular Medicine, 2017",
+                "benefits.06.title": "脑雾与认知障碍",
+                "benefits.06.desc": "提升记忆学习能力与认知功能，改善大脑活力。",
+                "benefits.06.ref": "- 雪梨新南威尔斯州威尔斯大学, Nutrients, 2022",
+                "benefits.07.title": "提高睡眠品质",
+                "benefits.07.desc": "睡眠品质提升后，日間精神疲劳感显著下降。",
+                "benefits.07.ref": "- 日本筑波大学, Nutrients, 2022",
+                "benefits.08.title": "糖尿病支持",
+                "benefits.08.desc": "提升葡萄糖处理率，对胰岛素的敏感性显著改善。",
+                "benefits.08.ref": "- 华盛顿大学, Science, 2021",
+                "benefits.nad_levels": "体内 NAD+ 浓度指标",
+                "benefits.nad_age": "50岁时减少约 50%",
+                "benefits.label.energy": "能量代谢",
+                "benefits.label.dna": "基因修复与抗衰",
+                "benefits.label.neuron": "神经与免疫",
+                "benefits.label.metabolism": "代谢与胰岛素",
+                "quality.title": "品质认证",
+                "quality.subtitle": "通过日本第三方机构 <img src='assets/JFRL_Logo.png' class='h-10 md:h-14 inline-block mx-2 align-middle' alt='JFRL'> 检验",
+                "quality.origin": "纯正日本来源 PURE JAPANESE ORIGIN",
+                "quality.ref.title": "检验来源经由：",
+                "quality.ref.list.1": "1. 日本第三方机构 JFRL （日本食品分析中心）检验",
+                "quality.ref.list.2": "2. 日本东京先端医学研究所（一般财团法人日本东京先端医学研究所）",
+                "quality.ref.list.3": "3. 第三方 GLP 检测实验室执行毒理与微生物检测",
+                "quality.ref.result": "检验结果显示，产品具备高纯度、安全性，无微生物污染、无重金属超标，且内毒素含量符合规范，适合应用于注射型制剂或高端营养补充用途。",
+                "quality.table.item": "检测项目 (Analytical Item)",
+                "quality.table.result": "检测结果 (Result)",
+                "quality.table.method": "检测方法 (Method)",
+                "contact.title": "开启您的",
+                "contact.title.span": "永恒活力",
+                "contact.title.end": "之旅",
+                "contact.desc": "预约专属科学咨询，由专业团队为您解析细胞修复的个人化方案，重新定义您的年龄边界与健康未来。",
+                "contact.btn": "立即预约咨询",
+                "footer.slogan": "ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />电话:080-2775-1122",
+                "footer.consult": "立即咨询 CONSULT NOW",
+                "footer.contact": "联络我们：INFO@EXOEVER.COM",
+                "footer.rights": "© 2026 EXOEVER. ALL RIGHTS RESERVED.",
+                "footer.madein": "MADE IN JAPAN"
+            },
+            "jp": {
+                "current_lang": "日本語",
+                "nav.features": "ホーム",
+                "nav.product": "製品紹介",
+                "nav.science": "科学研究",
+                "nav.quality": "品質認証",
+                "nav.contact": "お問い合わせ",
+                "nav.consult": "今すぐ相談",
+                "hero.label": "最高級の日本の科学処方",
+                "hero.subtitle": "長寿の哲学を再定義する",
+                "hero.desc": "細胞の若さの鍵。天然原料の生物酵素精製技術を利用し、NAD+の前駆体として高純度NMNを提供。究極の科学的処方で生命エネルギーを再起動します。",
+                "hero.explore": "NAD+の科学の深淵を探索",
+                "features.source": "EXOEVERとグローバル専門クリニックの提携",
+                "features.desc": "EXOEVERは上海、台湾、日本の一流クリニックと深い提携関係を築き、長寿トランスレーショナルサイエンスに基づいた精密なサービスを提供し、世界中のお客様のためにアンチエイジングと健康製品を研究開発し続けています。",
+                "features.tag1": "上海ネットワーク",
+                "features.tag2": "台湾パートナーシップ",
+                "features.tag3": "日本先端技術",
+                "clinics.title": "グローバル提携クリニック",
+                "clinics.taiwan.name": "Health Only クリニック",
+                "clinics.taiwan.loc": "台湾 TAIWAN",
+                "clinics.taiwan.desc": "個別化された健康管理と細胞修復に焦点を当て、最高級の医療サービス体験を提供します。",
+                "clinics.japan.name": "C5 Clinic クリニック",
+                "clinics.japan.loc": "日本 JAPAN",
+                "clinics.japan.desc": "最先端の再生医療技術を組み合わせ、アンチエイジングと長寿科学の臨床応用に尽力しています。",
+                "product.label": "製品紹介",
+                "product.origin": "MADE IN JAPAN 日本製",
+                "product.name": "Pre NAD+ 500mg",
+                "product.desc": "製品はUSP（米国薬局方）やJP（日本薬局方）などの基準に準拠しています。<br>原料は「天然食品に含まれるビタミンB3とアミノ酸」に由来します。<br>成分は「生物酵素変換精製」によって得られた高純度製品です。",
+                "product.f1.title": "純度 99% 以上",
+                "product.f1.desc": "生物酵素法による抽出を採用し、国際的な科学基準を満たす究極の純度を実現。",
+                "product.f2.title": "フリーズドライ技術",
+                "product.f2.desc": "最先端の低温乾燥技術により、有用成分を損なうことなく閉じ込め、吸収率と安定性を向上。",
+                "product.f3.title": "MADE IN JAPAN",
+                "product.f3.desc": "",
+                "science.title": "NAD+は細胞内のエネルギー生成に不可欠な助酵素であり、長寿遺伝子サーチュインを活性化する機能を持ちます。NMNはNAD+の前駆体として体内で速やかに変換されますが、加齢とともにそのレベルは著しく低下します。",
+                "science.label": "NAD+と人体の関係",
+                "science.age": "体内NAD+濃度の加齢に伴う変化",
+                "science.age.desc": "年齢とともに濃度が変化",
+                "science.age.content": "研究によると、20代からNAD+レベルは徐々に低下し始め、50歳になる頃には若い頃の半分にまで減少する可能性があります。",
+                "science.efficiency": "高効率吸収",
+                "science.efficiency.desc": "血漿濃度上昇曲線指標",
+                "science.efficiency.content": "経口高純度NMNは、血中のNAD+濃度を効果的に高め、安定した代謝機能を維持します。",
+                "science.atp": "ATPエネルギー合成",
+                "science.atp.desc": "ミトコンドリアエネルギー代謝メカニズム",
+                "science.atp.content": "NAD+はミトコンドリアのエネルギー代謝を活性化します。<br />細胞内に入るとATP生成を促進し、細胞の修復をサポートします。",
+                "benefits.title": "現在のNMN研究",
+                "benefits.title.span": "どのような有効機能がありますか？",
+                "benefits.desc": "ハーバード・メディカル・スクールの発見からあなたの日常へ：科学的に実証された若返りの奇跡",
+                "benefits.01.title": "ミトコンドリアとサーチュイン遺伝子の活性化",
+                "benefits.01.desc": "SIRT1およびSIRT3の活性を促進し、ミトコンドリア機能とエネルギー代謝を改善します。",
+                "benefits.01.ref": "- ハーバード大学, Sinclair, Cell, 2013",
+                "benefits.02.title": "脂肪燃焼",
+                "benefits.02.desc": "脂肪代謝の効率を高め、科学的に検証された体型の最適化をサポートします。",
+                "benefits.02.ref": "- ワシントン大学, Yoshino et al., Science, 2021",
+                "benefits.03.title": "血糖値の低下",
+                "benefits.03.desc": "筋肉などの組織におけるインスリン感受性を高め、グルコース代謝を改善し、代謝症候群のリスクを低減します。",
+                "benefits.03.ref": "- ワシントン大学, Yoshino et al., Science, 2021",
+                "benefits.04.title": "自律神経",
+                "benefits.04.desc": "NAD+はニューロン代謝に関与し、自律神経のバランスを間接的にサポートします。",
+                "benefits.04.ref": "- ハーバード大学, Nature Reviews Molecular Cell Biology, 2020",
+                "benefits.05.title": "アンチエイジング",
+                "benefits.05.desc": "NAD+経路の活性化を促進し、分子レベルで「健康寿命の延伸」をサポートします。",
+                "benefits.05.ref": "- ノルウェー オスロ大学, Trends in Molecular Medicine, 2017",
+                "benefits.06.title": "脳霧と認知機能",
+                "benefits.06.desc": "記憶力、学習能力、および認知機能を向上させ、脳の活力を改善します。",
+                "benefits.06.ref": "- UNSWシドニー, Nutrients, 2022",
+                "benefits.07.title": "睡眠の質の向上",
+                "benefits.07.desc": "睡眠の質が向上した後、日中の精神的な疲労感が大幅に軽減されます。",
+                "benefits.07.ref": "- 筑波大学, Nutrients, 2022",
+                "benefits.08.title": "糖尿病サポート",
+                "benefits.08.desc": "グルコース処理率を高め、インスリン感受性を大幅に改善します。",
+                "benefits.08.ref": "- ワシントン大学, Science, 2021",
+                "benefits.nad_levels": "体内 NAD+ 濃度指標",
+                "benefits.nad_age": "50歳までに約50%減少",
+                "benefits.label.energy": "エネルギー代謝",
+                "benefits.label.dna": "遺伝子修復と抗老化",
+                "benefits.label.neuron": "神経と免疫",
+                "benefits.label.metabolism": "代謝とインスリン",
+                "quality.title": "品質認証",
+                "quality.subtitle": "第三者機関 <img src='assets/JFRL_Logo.png' class='h-10 md:h-14 inline-block mx-2 align-middle' alt='JFRL'> による検査をクリア",
+                "quality.desc": "製品は高純度かつ安全性が高く、微生物汚染や重金属の過剰な含有はありません。",
+                "quality.ref.title": "検査機関：",
+                "quality.ref.list.1": "1. 第三者機関 JFRL（日本食品分析センター）による検査",
+                "quality.ref.list.2": "2. 東京先端医学研究所（一般財団法人日本東京先端医学研究所）",
+                "quality.ref.list.3": "3. 第三者 GLP 試験機関による毒性および微生物検査",
+                "quality.ref.result": "検査結果により、製品の高純度と安全性が確認されています。微生物汚染や重金属の過剰含有はなく、エンドトキシン含有量も規格に適合しており、注射剤や高品質な栄養補助食品への応用に適しています。",
+                "quality.origin": "純粋な日本由来 PURE JAPANESE ORIGIN",
+                "quality.table.item": "分析項目 (Analytical Item)",
+                "quality.table.result": "結果 (Result)",
+                "quality.table.method": "方法 (Method)",
+                "contact.title": "あなたの",
+                "contact.title.span": "永遠の活力",
+                "contact.title.end": "の旅を始める",
+                "contact.desc": "専門の科学的コンサルテーションを予約してください。専門チームがあなたのためにパーソナライズされた細胞修復プランを分析します。",
+                "contact.btn": "コンサルテーションを予約",
+                "footer.slogan": "ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />電話:080-2775-1122",
+                "footer.consult": "今すぐ相談 CONSULT NOW",
+                "footer.contact": "お問い合わせ：INFO@EXOEVER.COM",
+                "footer.rights": "© 2026 EXOEVER. ALL RIGHTS RESERVED.",
+                "footer.madein": "MADE IN JAPAN"
+            },
+            "vn": {
+                "current_lang": "TIẾNG VIỆT",
+                "nav.features": "TRANG CHỦ",
+                "nav.product": "SẢN PHẨM",
+                "nav.science": "KHOA HỌC",
+                "nav.quality": "CHẤT LƯỢNG",
+                "nav.contact": "LIÊN HỆ",
+                "nav.consult": "TƯ VẤN NGAY",
+                "hero.label": "CÔNG THỨC KHOA HỌC NHẬT BẢN CAO CẤP",
+                "hero.subtitle": "ĐỊNH NGHĨA LẠI TRIẾT LÝ TRƯỜNG THỌ",
+                "hero.desc": "Chìa khóa cho sự tươi trẻ của tế bào NAD+. Công thức từ Nhật Bản, sử dụng công nghệ tinh chế enzyme sinh học tự nhiên cung cấp độ tinh khiết cao 99% để tái khởi động năng lượng sống.",
+                "hero.explore": "KHÁM PHÁ KHOA HỌC NAD+",
+                "features.source": "Sự hợp tác của EXOEVER với các phòng khám chuyên nghiệp toàn cầu",
+                "features.desc": "EXOEVER thiết lập mối quan hệ hợp tác sâu rộng với các phòng khám hàng đầu tại Thượng Hải, Đài Loan và Nhật Bản, cung cấp các dịch vụ chính xác thông qua khoa học chuyển giao trường thọ, và liên tục nghiên cứu phát triển các sản phẩm chống lão hóa và sức khỏe cho khách hàng toàn cầu.",
+                "features.tag1": "Mạng Lưới Thượng Hải",
+                "features.tag2": "Hợp Tác Đài Loan",
+                "features.tag3": "Dẫn Đầu Nhật Bản",
+                "clinics.title": "Phòng Khám Hợp Tác Toàn Cầu",
+                "clinics.taiwan.name": "Phòng Khám Health Only",
+                "clinics.taiwan.loc": "ĐÀI LOAN",
+                "clinics.taiwan.desc": "Tập trung vào quản lý sức khỏe cá nhân hóa và sửa chữa tế bào, mang đến trải nghiệm dịch vụ y tế hàng đầu.",
+                "clinics.japan.name": "Phòng Khám C5 Clinic",
+                "clinics.japan.loc": "NHẬT BẢN",
+                "clinics.japan.desc": "Kết hợp công nghệ y học tái tạo tiên tiến, chuyên tâm vào ứng dụng lâm sàng của khoa học chống lão hóa và trường thọ.",
+                "product.label": "GIỚI THIỆU SẢN PHẨM",
+                "product.origin": "MADE IN JAPAN SẢN XUẤT TẠI NHẬT BẢN",
+                "product.name": "Pre NAD+ 500mg",
+                "product.desc": "Sản phẩm tuân thủ các tiêu chuẩn như USP (Dược điển Hoa Kỳ) hoặc JP (Dược điển Nhật Bản).<br>Nguyên liệu có nguồn gốc từ Vitamin B3 và axit amin trong thực phẩm tự nhiên.<br>Thành phần là sản phẩm độ tinh khiết cao thu được qua quá trình chuyển hóa và tinh chế bằng enzyme sinh học.",
+                "product.f1.title": "Độ tinh khiết ≥ 99%",
+                "product.f1.desc": "Chiết xuất bằng phương pháp enzyme sinh học đảm bảo độ tinh khiết cực cao.",
+                "product.f2.title": "Công nghệ Đông khô",
+                "product.f2.desc": "Khóa chặt các thành phần hoạt tính, tăng cường khả năng hấp thụ và ổn định.",
+                "product.f3.title": "MADE IN JAPAN",
+                "product.f3.desc": "",
+                "science.title": "NAD+ là một coenzyme thiết yếu để tạo năng lượng tế bào và kích hoạt gen trường thọ Sirtuins. Là tiền chất, NMN nhanh chóng chuyển đổi thành NAD+ trong cơ thể. Tuy nhiên, nồng độ NAD+ giảm đáng kể theo tuổi tác.",
+                "science.label": "Mối quan hệ giữa NAD+ và Cơ thể con người",
+                "science.age": "NỒNG ĐỘ NAD+ THAY ĐỔI THEO ĐỘ TUỔI",
+                "science.age.desc": "NỒNG ĐỘ GIẢM THEO ĐỘ TUỔI",
+                "science.age.content": "Các nghiên cứu cho thấy bắt đầu từ tuổi 20, nồng độ NAD+ giảm dần và đến tuổi 50, nồng độ này có thể giảm xuống còn một nửa so with lúc trẻ.",
+                "science.efficiency": "HẤP THU HIỆU QUẢ",
+                "science.efficiency.desc": "CHỈ SỐ NỒNG ĐỘ HUYẾT TƯƠNG",
+                "science.efficiency.content": "NMN độ tinh khiết cao đường uống giúp tăng nồng độ NAD+ trong máu một cách hiệu quả, duy trì chức năng trao đổi chất ổn định.",
+                "science.atp": "TỔNG HỢP NĂNG LƯỢNG ATP",
+                "science.atp.desc": "CƠ CHẾ TRAO ĐỔI CHẤT CỦA TY THỂ",
+                "science.atp.content": "NAD+ có thể kích hoạt quá trình trao đổi năng lượng của ty thể.<br />Sau khi đi vào tế bào, nó thúc đẩy quá trình tạo ra ATP, từ đó hỗ trợ sửa chữa tế bào.",
+                "benefits.title": "Nghiên cứu NMN hiện tại",
+                "benefits.title.span": "Các chức năng hiệu quả là gì?",
+                "benefits.desc": "Từ những phát hiện của Trường Y Harvard đến cuộc sống hàng ngày của bạn: phép màu đảo ngược lão hóa đã được khoa học chứng minh.",
+                "benefits.01.title": "Kích hoạt ti thể & Sirtuins",
+                "benefits.01.desc": "Thúc đẩy hoạt động của SIRT1 và SIRT3, cải thiện chức năng ti thể và chuyển hóa năng lượng.",
+                "benefits.01.ref": "- Đại học Harvard, Sinclair, Cell, 2013",
+                "benefits.02.title": "Đốt cháy chất béo",
+                "benefits.02.desc": "Tăng cường hiệu quả chuyển hóa chất béo, tối ưu hóa cơ thể đã được xác minh khoa học.",
+                "benefits.02.ref": "- Đại học Washington, Yoshino et al., Science, 2021",
+                "benefits.03.title": "Giảm đường huyết",
+                "benefits.03.desc": "Cải thiện độ nhạy insulin ở cơ và các mô khác, chuyển hóa glucose và giảm nguy cơ hội chứng chuyển hóa.",
+                "benefits.03.ref": "- Đại học Washington, Yoshino et al., Science, 2021",
+                "benefits.04.title": "Hệ thần kinh tự chủ",
+                "benefits.04.desc": "NAD+ liên quan đến chuyển hóa tế bào thần kinh, hỗ trợ gián tiếp cân bằng hệ thần kinh tự chủ.",
+                "benefits.04.ref": "- Đại học Harvard, Nature Reviews Molecular Cell Biology, 2020",
+                "benefits.05.title": "Chống lão hóa",
+                "benefits.05.desc": "Thúc đẩy kích hoạt con đường NAD+, hỗ trợ 'kéo dài tuổi thọ khỏe mạnh' ở cấp độ phân tử.",
+                "benefits.05.ref": "- Đại học Oslo, Trends in Molecular Medicine, 2017",
+                "benefits.06.title": "Sương mù não & Nhận thức",
+                "benefits.06.desc": "Cải thiện trí nhớ, khả năng học tập và chức năng nhận thức.",
+                "benefits.06.ref": "- UNSW Sydney, Nutrients, 2022",
+                "benefits.07.title": "Cải thiện chất lượng giấc ngủ",
+                "benefits.07.desc": "Giảm đáng kể tình trạng mệt mỏi tinh thần ban ngày sau khi chất lượng giấc ngủ được cải thiện.",
+                "benefits.07.ref": "- Đại học Tsukuba, Nutrients, 2022",
+                "benefits.08.title": "Hỗ trợ tiểu đường",
+                "benefits.08.desc": "Tốc độ xử lý glucose cao hơn và cải thiện độ nhạy insulin ở phụ nữ tiền tiểu đường.",
+                "benefits.08.ref": "- Đại học Washington, Science, 2021",
+                "benefits.nad_levels": "CHỈ SỐ NỒNG ĐỘ NAD+",
+                "benefits.nad_age": "-50% ở tuổi 50",
+                "benefits.label.energy": "TRAO ĐỔI<br>NĂNG LƯỢNG",
+                "benefits.label.dna": "SỬA CHỮA GEN &<br>CHỐNG LÃO HÓA",
+                "benefits.label.neuron": "THẦN KINH &<br>MIỄN DỊCH",
+                "benefits.label.metabolism": "TRAO ĐỔI CHẤT &<br>INSULIN",
+                "quality.title": "CHỨNG NHẬN CHẤT LƯỢNG",
+                "quality.subtitle": "ĐÃ KIỂM NGHIỆM QUA CƠ QUAN THỨ BA <img src='assets/JFRL_Logo.png' class='h-10 md:h-14 inline-block mx-2 align-middle' alt='JFRL'> NHẬT BẢN",
+                "quality.desc": "Sản phẩm độ tinh khiết cao, an toàn, không nhiễm vi sinh và không vượt chuẩn kim loại nặng.",
+                "quality.ref.title": "Nguồn gốc kiểm nghiệm qua:",
+                "quality.ref.list.1": "1. Cơ quan bên thứ ba Nhật Bản JFRL (Trung tâm Phân tích Thực phẩm Nhật Bản) kiểm nghiệm",
+                "quality.ref.list.2": "2. Viện Nghiên cứu Y học Tiên tiến Tokyo Nhật Bản (Pháp nhân Tổng hợp)",
+                "quality.ref.list.3": "3. Phòng thí nghiệm kiểm nghiệm GLP bên thứ ba thực hiện kiểm tra độc tính và vi sinh",
+                "quality.ref.result": "Kết quả cho thấy sản phẩm có độ tinh khiết cao, an toàn, không nhiễm vi sinh, không vượt chuẩn kim loại nặng, thích hợp cho các chế phẩm dạng tiêm hoặc bổ sung dinh dưỡng cao cấp.",
+                "quality.origin": "NGUỒN GỐC NHẬT BẢN THUẦN TÚY",
+                "quality.table.item": "MỤC PHÂN TÍCH",
+                "quality.table.result": "KẾT QUẢ",
+                "quality.table.method": "PHƯƠNG PHÁP",
+                "contact.title": "BẮT ĐẦU HÀNH TRÌNH",
+                "contact.title.span": "SỨC SỐNG VĨNH CỬU",
+                "contact.title.end": "CỦA BẠN",
+                "contact.desc": "Đặt lịch tư vấn khoa học chuyên sâu, đội ngũ chuyên gia của chúng tôi sẽ phân tích kế hoạch sửa chữa tế bào cá nhân hóa cho bạn.",
+                "contact.btn": "ĐẶT LỊCH TƯ VẤN",
+                "footer.slogan": "ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />SĐT: 080-2775-1122",
+                "footer.consult": "TƯ VẤN NGAY",
+                "footer.contact": "LIÊN HỆ: INFO@EXOEVER.COM",
+                "footer.rights": "© 2026 EXOEVER. ALL RIGHTS RESERVED.",
+                "footer.madein": "SẢN XUẤT TẠI NHẬT BẢN"
+            },
+            "my": {
+                "current_lang": "BAHASA MELAYU",
+                "nav.features": "LAMAN UTAMA",
+                "nav.product": "PRODUK",
+                "nav.science": "SAINS",
+                "nav.quality": "KUALITI",
+                "nav.contact": "HUBUNGI",
+                "nav.consult": "KONSULTASI SEKARANG",
+                "hero.label": "FORMULA SAINS JEPUN PREMIUM",
+                "hero.subtitle": "MENDEFINISI SEMULA FALSAFAH PANJANG UMUR",
+                "hero.desc": "NAD+, kunci kepada keremajaan selular. Formula dari Jepun, menggunakan teknologi penulenan enzim biologi semula jadi untuk membekalkan kepekatan ketulenan tinggi 99% untuk memulakan semula tenaga kehidupan.",
+                "hero.explore": "TEROKAI SAINS NAD+",
+                "features.source": "Kerjasama EXOEVER dengan Klinik Profesional Global",
+                "features.desc": "EXOEVER menjalinkan kerjasama mendalam dengan klinik terkemuka di Shanghai, Taiwan, dan Jepun, menyediakan perkhidmatan ketepatan melalui sains translasi panjang umur, dan terus menyelidik serta membangunkan produk anti-penuaan dan kesihatan untuk pelanggan global.",
+                "features.tag1": "Rangkaian Shanghai",
+                "features.tag2": "Kerjasama Taiwan",
+                "features.tag3": "Peneraju Jepun",
+                "clinics.title": "Klinik Kerjasama Global",
+                "clinics.taiwan.name": "Klinik Health Only",
+                "clinics.taiwan.loc": "TAIWAN",
+                "clinics.taiwan.desc": "Memberi tumpuan kepada pengurusan kesihatan peribadi dan pembaikan sel, menyediakan pengalaman perkhidmatan perubatan peringkat atasan.",
+                "clinics.japan.name": "Klinik C5 Clinic",
+                "clinics.japan.loc": "JEPUN",
+                "clinics.japan.desc": "Menggabungkan teknologi perubatan regeneratif canggih, berdedikasi kepada aplikasi klinikal sains anti-penuaan dan panjang umur.",
+                "product.label": "PENGENALAN PRODUK",
+                "product.origin": "MADE IN JAPAN BUATAN JEPUN",
+                "product.name": "Pre NAD+ 500mg",
+                "product.desc": "Produk mematuhi piawaian seperti USP (Farmakope AS) atau JP (Farmakope Jepun).<br>Bahan mentah berasal daripada Vitamin B3 dan asid amino dalam makanan semula jadi.<br>Ramuan adalah produk berketulenan tinggi yang diperoleh melalui penukaran dan penulenan enzim biologi.",
+                "product.f1.title": "Ketulenan ≥ 99%",
+                "product.f1.desc": "Diekstrak menggunakan kaedah enzim biologi untuk memastikan ketulenan ekstrem.",
+                "product.f2.title": "Teknologi Pengeringan Beku",
+                "product.f2.desc": "Mengekalkan ramuan aktif, meningkatkan penyerapan dan kestabilan.",
+                "product.f3.title": "MADE IN JAPAN",
+                "product.f3.desc": "",
+                "science.title": "NAD+ ialah koenzim penting untuk penghasilan tenaga selular dan mengaktifkan gen panjang umur (Sirtuins). Sebagai prekursor, NMN menukar cepat kepada NAD+ dalam badan. Walau bagaimanapun, tahap NAD+ menurun secara ketara dengan usia.",
+                "science.label": "Hubungan antara NAD+ dan Tubuh Manusia",
+                "science.age": "PERUBAHAN KEPEKATAN NAD+ MENGIKUT UMUR",
+                "science.age.desc": "TAHAP MENURUN MENGIKUT UMUR",
+                "science.age.content": "Kajian menunjukkan bahawa bermula dari umur 20 tahun, tahap NAD+ berkurangan secara beransur-ansur, dan menjelang umur 50 tahun, ia mungkin telah menurun kepada separuh daripada tahap semasa muda.",
+                "science.efficiency": "PENYERAPAN CEKAP",
+                "science.efficiency.desc": "INDEKS KEPEKATAN PLASMA",
+                "science.efficiency.content": "NMN berketulenan tinggi secara oral meningkatkan kepekatan NAD+ dalam darah secara berkesan, mengekalkan fungsi metabolik yang stabil.",
+                "science.atp": "SINTESIS TENAGA ATP",
+                "science.atp.desc": "MEKANISME METABOLISME MITOKONDRIA",
+                "science.atp.content": "NAD+ boleh mengaktifkan metabolisme tenaga mitokondria.<br />Selepas memasuki sel, ia menggalakkan penjanaan ATP, seterusnya menyokong pembaikan selular.",
+                "benefits.title": "Penyelidikan NMN Semasa",
+                "benefits.title.span": "Apakah fungsi yang berkesan?",
+                "benefits.desc": "Dari penemuan Harvard Medical School ke kehidupan harian anda: keajaiban pembalikan usia yang disahkan secara klinikal.",
+                "benefits.01.title": "Aktifkan Mitokondria & Sirtuins",
+                "benefits.01.desc": "Menggalakkan aktiviti SIRT1 dan SIRT3, menambah baik fungsi mitokondria dan metabolisme tenaga.",
+                "benefits.01.ref": "- Universiti Harvard, Sinclair, Cell, 2013",
+                "benefits.02.title": "Pembakaran Lemak",
+                "benefits.02.desc": "Meningkatkan kecekapan metabolisme lemak, pengoptimuman badan yang disahkan secara saintifik.",
+                "benefits.02.ref": "- Universiti Washington, Yoshino et al., Science, 2021",
+                "benefits.03.title": "Menurunkan Paras Gula Darah",
+                "benefits.03.desc": "Meningkatkan sensitiviti insulin dalam otot dan tisu lain, metabolisme glukosa, dan mengurangkan risiko sindrom metabolik.",
+                "benefits.03.ref": "- Universiti Washington, Yoshino et al., Science, 2021",
+                "benefits.04.title": "Sistem Saraf Autonomik",
+                "benefits.04.desc": "NAD+ melibatkan metabolisme neuron, membantu keseimbangan autonomik secara tidak langsung.",
+                "benefits.04.ref": "- Universiti Harvard, Nature Reviews Molecular Cell Biology, 2020",
+                "benefits.05.title": "Anti-Penuaan",
+                "benefits.05.desc": "Menggalakkan pengaktifan laluan NAD+, menyokong 'lanjutan jangka hayat sihat' pada peringkat molekul.",
+                "benefits.05.ref": "- Universiti Oslo, Trends in Molecular Medicine, 2017",
+                "benefits.06.title": "Kabur Otak & Kognisi",
+                "benefits.06.desc": "Meningkatkan ingatan, keupayaan pembelajaran, dan fungsi kognitif.",
+                "benefits.06.ref": "- UNSW Sydney, Nutrients, 2022",
+                "benefits.07.title": "Tingkatkan Kualiti Tidur",
+                "benefits.07.desc": "Penurunan ketara dalam keletihan mental waktu siang selepas kualiti tidur bertambah baik.",
+                "benefits.07.ref": "- Universiti Tsukuba, Nutrients, 2022",
+                "benefits.08.title": "Sokongan Diabetes",
+                "benefits.08.desc": "Kadar pelupusan glukosa yang lebih tinggi dan sensitiviti insulin yang bertambah baik pada wanita pra-diabetik.",
+                "benefits.08.ref": "- Universiti Washington, Science, 2021",
+                "benefits.nad_levels": "TAHAP NAD+ DALAM BADAN",
+                "benefits.nad_age": "-50% pada usia 50",
+                "benefits.label.energy": "METABOLISME<br>TENAGA",
+                "benefits.label.dna": "PEMBAIKAN DNA &<br>ANTI-PENUAAN",
+                "benefits.label.neuron": "NEURON &<br>IMUN",
+                "benefits.label.metabolism": "METABOLISME &<br>INSULIN",
+                "quality.title": "PENSIJILAN KUALITI",
+                "quality.subtitle": "DISAHKAN OLEH LEMBAGA PIHAK KETIGA <img src='assets/JFRL_Logo.png' class='h-10 md:h-14 inline-block mx-2 align-middle' alt='JFRL'> JEPUN",
+                "quality.desc": "Produk berkualiti dengan ketulenan tinggi, selamat, tanpa pencemaran mikrob atau logam berat berlebihan.",
+                "quality.ref.title": "Sumber pemeriksaan melalui:",
+                "quality.ref.list.1": "1. Pemeriksaan oleh lembaga pihak ketiga Jepun JFRL (Pusat Analisis Makanan Jepun)",
+                "quality.ref.list.2": "2. Institut Penyelidikan Perubatan Lanjutan Tokyo Jepun (Yayasan Umum Diperbadankan)",
+                "quality.ref.list.3": "3. Makmal ujian GLP pihak ketiga untuk ujian toksikologi dan mikrob",
+                "quality.ref.result": "Keputusan menunjukkan produk mempunyai ketulenan tinggi, selamat, sesuai untuk persediaan jenis suntikan atau makanan tambahan pemakanan premium.",
+                "quality.origin": "ASAL JEPUN TULEN",
+                "quality.table.item": "ITEM ANALITIKAL",
+                "quality.table.result": "KEPUTUSAN",
+                "quality.table.method": "KAEDAH",
+                "contact.title": "MULAKAN PERJALANAN",
+                "contact.title.span": "TENAGA ETERNAL",
+                "contact.title.end": "ANDA",
+                "contact.desc": "Tempah konsultasi sains yang berdedikasi, dan pasukan profesional kami akan menganalisis pelan pembaikan selular yang diperibadikan untuk anda.",
+                "contact.btn": "TEMPAH KONSULTASI",
+                "footer.slogan": "ヘルスオンリー株式会社<br />901-0225 沖縄県豊見城市字豊崎1番地1198-1207号室<br />TEL: 080-2775-1122",
+                "footer.consult": "KONSULTASI SEKARANG",
+                "footer.contact": "HUBUNGI: INFO@EXOEVER.COM",
+                "footer.rights": "© 2026 EXOEVER. ALL RIGHTS RESERVED.",
+                "footer.madein": "BUATAN JEPUN"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            // Save language preference
+            localStorage.setItem('selectedLanguage', lang);
+
+            // Close menu after selection
+            const langMenu = document.querySelector('.lang-menu');
+            if (langMenu) langMenu.classList.remove('active');
+        }
+
+        function toggleLangMenu(event) {
+            event.stopPropagation();
+            const langMenu = document.querySelector('.lang-menu');
+            if (langMenu) langMenu.classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                const isOpen = !mobileMenu.classList.contains('translate-x-full');
+                if (isOpen) {
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                } else {
+                    mobileMenu.classList.remove('translate-x-full');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function (event) {
+            if (!event.target.closest('.lang-dropdown')) {
+                const langMenu = document.querySelector('.lang-menu');
+                if (langMenu && langMenu.classList.contains('active')) {
+                    langMenu.classList.remove('active');
+                }
+            }
+        }
+
+        // Automatic Language Detection
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selectedLanguage');
+            if (savedLang && translations[savedLang]) {
+                changeLanguage(savedLang);
+            } else {
+                const browserLang = navigator.language || navigator.userLanguage;
+                let defaultLang = 'tw'; // Default fallback
+
+                if (browserLang.includes('ja')) defaultLang = 'jp';
+                else if (browserLang.includes('vi')) defaultLang = 'vn';
+                else if (browserLang.includes('ms')) defaultLang = 'my';
+                else if (browserLang.includes('zh-CN')) defaultLang = 'cn';
+                else if (browserLang.includes('zh')) defaultLang = 'tw';
+                else if (browserLang.startsWith('en')) defaultLang = 'en';
+                else defaultLang = 'en'; // Standard global default
+
+                changeLanguage(defaultLang);
+            }
+        });
+    </script>
+</body>
+
+</html>
